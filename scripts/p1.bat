@@ -14,3 +14,5 @@ IF NOT EXIST "%MYSQL_HOME%" (
 
 
 start call "%MYSQL_HOME%\bin\mysqld" --console
+
+call "%MYSQL_HOME%/bin/mysql" -h localhost -P 3307 -u root < sqlscripts/INITDB.sql
