@@ -6,6 +6,8 @@ SET MYSQL_HOME=%ROOT_FOLDER_PATH%\Public\mysql\
 SET MYSQL_ZIP_NAME=mysql.zip.001
 SET FLYWAY_FOLDER_PATH=%ROOT_FOLDER_PATH%\Public\flyway-2.3
 SET FLYWAY_ZIP_PATH=flyway.zip
+SET APACHE_FOLDER_PATH=%ROOT_FOLDER_PATH%\Public\Apache24
+SET APACHE_ZIP_PATH=apache.zip
 
 REM -----commenting extraction
 IF NOT EXIST "%MYSQL_HOME%" (
@@ -18,6 +20,15 @@ IF NOT EXIST "%FLYWAY_FOLDER_PATH%" (
 	echo %FLYWAY_FOLDER_PATH% NOT FOUND so extracting it
 	call "%ProgramFiles%\7-Zip\7z" x "%SERVERS_FOLDER_NAME%\%FLYWAY_ZIP_PATH%" -o"%SERVERS_FOLDER_NAME%\"
 ) 
+
+REM -----commenting extraction
+IF NOT EXIST "%APACHE_FOLDER_PATH%" (
+	echo %APACHE_FOLDER_PATH% NOT FOUND so extracting it
+	call "%ProgramFiles%\7-Zip\7z" x "%SERVERS_FOLDER_NAME%\%APACHE_ZIP_PATH%" -o"%SERVERS_FOLDER_NAME%\"
+	cscript %ROOT_FOLDER_PATH%\scripts\replace.vbs "%APACHE_FOLDER_PATH%\conf\httpd.conf" "c:/Apache24" "%APACHE_FOLDER_PATH%"
+) 
+
+
 
 
 start call "%MYSQL_HOME%\bin\mysqld" --console
@@ -32,3 +43,6 @@ REM migrating SQL scripts
 call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root -locations=filesystem:%ROOT_FOLDER_PATH%/sqlscripts/flyway migrate
 REM checking status
 call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root info
+
+start call "%APACHE_FOLDER_PATH%\bin\httpd"
+
