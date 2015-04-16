@@ -43,12 +43,9 @@ IF NOT EXIST "%PHP_FOLDER_PATH%" (
 
 start call "%MYSQL_HOME%\bin\mysqld" --console
 
-call "%MYSQL_HOME%/bin/mysql" -h localhost -P 3307 -u root < sqlscripts/INITDB.sql
+call "%MYSQL_HOME%/bin/mysql" -h localhost -P 3307 -u root  < sqlscripts/INITDB.sql
 
-REM initiating flyway
-call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root clean
-
-call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root init
+rem call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root init
 REM migrating SQL scripts
 call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root -locations=filesystem:%ROOT_FOLDER_PATH%/sqlscripts/flyway migrate
 REM checking status

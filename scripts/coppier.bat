@@ -13,3 +13,5 @@ SET PHP_FOLDER_PATH=%ROOT_FOLDER_PATH%\Public\php
 SET PHP_ZIP_PATH=php5.6.zip
 
 xcopy /S /Y "%SOURCE_FOLDER_PATH%" "%APACHE_FOLDER_PATH%\htdocs"
+
+cd scripts
