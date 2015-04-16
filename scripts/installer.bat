@@ -1,6 +1,7 @@
 @echo on
 CD ..
 SET ROOT_FOLDER_PATH=%CD%
+SET SOURCE_FOLDER_PATH=%ROOT_FOLDER_PATH%\src
 SET SERVERS_FOLDER_NAME=%ROOT_FOLDER_PATH%\Public
 SET MYSQL_HOME=%ROOT_FOLDER_PATH%\Public\mysql\
 SET MYSQL_ZIP_NAME=mysql.zip.001
@@ -54,6 +55,9 @@ REM checking status
 call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root info
 
 set PATH=%PATH%;%PHP_FOLDER_PATH%
+
+
+xcopy /S /Y "%SOURCE_FOLDER_PATH%" "%APACHE_FOLDER_PATH%\htdocs"
 
 start call "%APACHE_FOLDER_PATH%\bin\httpd"
 
