@@ -1,5 +1,6 @@
 <?php
-include 'dbconstants.php'; 
+require 'dbconstants.php';
+
 try
 {
 $servername = servername;
@@ -7,30 +8,28 @@ $username = username;
 $dbpassword = dbpassword;
 $dbname = dbname;
 
-$name=$_POST["name"];
 $email=$_POST["email"];
-$dob=$_POST["dob"];
 $password=$_POST["password"];
-
-// Validate e-mail
-if (!filter_var($email, FILTER_VALIDATE_EMAIL) ) {
-   // error
-}
+	
 
 // Create connection
 $conn = new mysqli($servername, $username, $dbpassword, $dbname);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+} 
+
+$stmt = $conn->prepare("SELECT id FROM account where email=? and password=?");
+$stmt->bind_param("ss", $email, $password);
+
+$result = $stmt->execute();
+$stmt->bind_result($id);
+if($stmt->fetch()){
+	echo "sucess",$id;
 }
-
-// prepare and bind
-$stmt = $conn->prepare("INSERT INTO account (name, email,dob,password) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $name, $email, $dob, $password);
-
-
-$stmt->execute();
+else {
+	echo "failure";
+}
 
 }
 
@@ -38,7 +37,6 @@ catch (Exception $e) {
   //error
 }
 finally{
-$stmt->close();
 $conn->close();
 }
 

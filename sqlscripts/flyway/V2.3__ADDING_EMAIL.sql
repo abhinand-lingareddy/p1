@@ -1,2 +1,2 @@
 ALTER TABLE account
-ADD email varchar(16);
+ADD email varchar(32);

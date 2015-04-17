@@ -11,4 +11,4 @@ confirm password: <input type="password" name="confirm_password"><br>
 </form>
 
 </body>
-</html
+</html>
