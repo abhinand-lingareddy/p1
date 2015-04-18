@@ -3,7 +3,7 @@ include 'dbconstants.php';
 try
 {
 $servername = servername;
-$username = username;
+$dbusername = username;
 $dbpassword = dbpassword;
 $dbname = dbname;
 
@@ -18,7 +18,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) ) {
 }
 
 // Create connection
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -31,6 +31,7 @@ $stmt->bind_param("ssss", $name, $email, $dob, $password);
 
 
 $stmt->execute();
+header("location: login.php");
 
 }
 
