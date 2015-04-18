@@ -43,6 +43,8 @@ IF NOT EXIST "%PHP_FOLDER_PATH%" (
 
 start call "%MYSQL_HOME%\bin\mysqld" --console
 
+timeout /t 5
+
 call "%MYSQL_HOME%/bin/mysql" -h localhost -P 3307 -u root  < sqlscripts/INITDB.sql
 
 rem call "%FLYWAY_FOLDER_PATH%\flyway" -url=jdbc:mysql://localhost:3307/connections -user=root init
