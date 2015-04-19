@@ -1,9 +1,6 @@
 <?php
-session_start();
-if(!isset($_SESSION['id']))
-{
-	header("location: login.php");
-}
+require 'session.php';
+
 require 'dbconstants.php';
 
 try
@@ -53,7 +50,9 @@ finally{
 username<?php echo $username?><br>
 email<?php echo $email?><br>
 dob<?php echo $dob?><br>
-achievements<?php  
+achievements
+<form method="post" action="edit_delete_achievement.php">
+<?php  
 
 $ach_json=json_decode($ach,true);
 
@@ -70,13 +69,16 @@ for ($i=0;$i<count($ach_json);$i++){
 	
 	$desc=$ach_json[$i]['description'];
 	echo "<label>description</label> $desc<br>";
+	
+	echo "<input type='image' src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-document-edit-icon.png'  type='submit' name='edit' value='$i'>";
+	echo "<input type='image' src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-edit-delete-icon.png' type='submit' name='delete' value='$i'>";
 			
 }
 
 
 ?>
 
-
+</form>
 
 
 <br>

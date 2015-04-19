@@ -1,10 +1,7 @@
 <?php
 require 'dbconstants.php';
-session_start();
-if(!isset($_SESSION['id']))
-{
-	header("location: login.php");
-}
+require 'session.php';
+
 try
 {
 	$servername = servername;
@@ -39,7 +36,12 @@ try
 		else{
 			$ach_array=array();
 		}
+		if(isset($_POST["record_id"])){
+			$record_id=$_POST["record_id"];
+			$ach_array[$record_id]=$new_ach;
+		}else{
 		array_push($ach_array,$new_ach );
+		}
 		$encoded_achievements=json_encode($ach_array);
 		$stmt = $conn->prepare("UPDATE account set achievements = ?  where id = ?");
 		$stmt->bind_param("si", $encoded_achievements,$id);
