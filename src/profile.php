@@ -53,7 +53,37 @@ finally{
 username<?php echo $username?><br>
 email<?php echo $email?><br>
 dob<?php echo $dob?><br>
-achievements<?php echo $ach?><br>
+achievements<?php  
+
+$ach_json=json_decode($ach,true);
+
+for ($i=0;$i<count($ach_json);$i++){
+	
+	$title=$ach_json[$i]['title'];
+	echo "<h3>title $title</h3><br>";
+	
+	$org=$ach_json[$i]['organisation'];
+	echo "<label>organisation</label> $org<br>";
+	
+	$date=$ach_json[$i]['date'];
+	echo "<label>date</label> $date<br>";
+	
+	$desc=$ach_json[$i]['description'];
+	echo "<label>description</label> $desc<br>";
+			
+}
+
+
+?>
+
+
+
+
+<br>
+
+
+
+
 Add achievement
 <form action="add_achievements.php" method="post">
 Title: <input type="text" name="title"><br>
