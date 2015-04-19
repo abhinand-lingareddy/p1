@@ -1,0 +1,1 @@
+ALTER TABLE account CHANGE achivements achievements LONGTEXT;

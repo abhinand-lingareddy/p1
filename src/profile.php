@@ -25,7 +25,7 @@ try
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$stmt = $conn->prepare("SELECT name,email,dob,achivements FROM account where id=? ");
+	$stmt = $conn->prepare("SELECT name,email,dob,achievements FROM account where id=? ");
 	$stmt->bind_param("i", $id);
 
 	$result = $stmt->execute();
@@ -53,7 +53,16 @@ finally{
 username<?php echo $username?><br>
 email<?php echo $email?><br>
 dob<?php echo $dob?><br>
-achivements<?php echo $ach?><br>
+achievements<?php echo $ach?><br>
+Add achievement
+<form action="add_achievements.php" method="post">
+Title: <input type="text" name="title"><br>
+Organisation: <input type="text" name="organisation"><br>
+Date: <input type="text" name="date"><br>
+<label >Description </label>
+<textarea name="description"></textarea> 
+<input type="submit">
+</form>
 
 </body>
 </html>
