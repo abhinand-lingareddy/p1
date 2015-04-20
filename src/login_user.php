@@ -4,7 +4,7 @@ require 'dbconstants.php';
 try
 {
 $servername = servername;
-$username = username;
+$dbusername = username;
 $dbpassword = dbpassword;
 $dbname = dbname;
 
@@ -13,19 +13,22 @@ $password=$_POST["password"];
 	
 
 // Create connection
-$conn = new mysqli($servername, $username, $dbpassword, $dbname);
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$stmt = $conn->prepare("SELECT id FROM account where email=? and password=?");
+$stmt = $conn->prepare("SELECT id,name FROM account where email=? and password=?");
 $stmt->bind_param("ss", $email, $password);
 
 $result = $stmt->execute();
-$stmt->bind_result($id);
+$stmt->bind_result($id,$name);
 if($stmt->fetch()){
-	echo "sucess",$id;
+	session_start();
+	$_SESSION["username"] = $name;
+	$_SESSION["id"] = $id;
+	header("location: index.php");
 }
 else {
 	echo "failure";
