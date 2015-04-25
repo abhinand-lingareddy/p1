@@ -28,8 +28,8 @@ try {
 	$stmt->bind_result ( $name, $email, $dob, $ach );
 	if ( $stmt->fetch ()) {
 		$json_result["name"]=$name;
-		$json_result["email"]=$name;
-		$json_result["dob"]=$name;
+		$json_result["email"]=$email;
+		$json_result["dob"]=$dob;
 		$json_result["achievements"]=json_decode($ach,true);
 		$user_json=json_encode($json_result);
 		echo $user_json;
