@@ -1,5 +1,5 @@
 var p1=angular.module('p1', []);
-p1.controller("userController",['$scope','$http','$location',function($scope,$http,$location){
+p1.controller("userController",['$scope','$http',function($scope,$http){
 	$scope.editClick=function(i){
 		$scope.edit[i]="false";
 	}
@@ -69,9 +69,27 @@ p1.controller("userController",['$scope','$http','$location',function($scope,$ht
 		});
 		request.success(function (data) {
 		    $scope.user=data;
+			if($scope.user["achievements"]==null){
+				$scope.user["achievements"]=[];
+			}
 		});
 	}
 	
+	
+}]);
+p1.controller("peerController",['$scope','$http',function($scope,$http){
+	$scope.dataInit=function(data){
+		$scope.edit=[];
+		var request = $http({
+		    method: "get",
+		    url: "/peerprofile.php?user="+data,
+		    headers: { 'Content-Type': 'application/json'
+		    	}
+		});
+		request.success(function (data) {
+		    $scope.user=data;
+		});
+	}
 	
 }]);
 

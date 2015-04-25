@@ -1,8 +1,6 @@
 
 
 <?php
-require 'session.php';
-
 require 'dbconstants.php';
 
 try {
@@ -10,10 +8,13 @@ try {
 	$dbusername = username;
 	$dbpassword = dbpassword;
 	$dbname = dbname;
-	
-	$username = $_SESSION ["username"];
-	$id = $_SESSION ["id"];
-	
+	if(isset($_GET["user"])){
+	$user=$_GET["user"];
+	}
+	else{
+		session_start();
+		$user=$_SESSION["username"];
+	}
 	// Create connection
 	$conn = new mysqli ( $servername, $dbusername, $dbpassword, $dbname );
 	// Check connection
@@ -21,21 +22,19 @@ try {
 		die ( "Connection failed: " . $conn->connect_error );
 	}
 	
-	$stmt = $conn->prepare ( "SELECT name,email,dob,achievements FROM account where id=? " );
-	$stmt->bind_param ( "i", $id );
+	$stmt = $conn->prepare ( "SELECT name,email,dob,achievements FROM account where name=? " );
+	$stmt->bind_param ( "s", $user );
 	
 	$result = $stmt->execute ();
 	$stmt->bind_result ( $name, $email, $dob, $ach );
-	if ( $stmt->fetch ()) {
-		$json_result["name"]=$name;
-		$json_result["email"]=$name;
-		$json_result["dob"]=$name;
-		$json_result["achievements"]=json_decode($ach,true);
-		$user_json=json_encode($json_result);
-		echo $user_json;
-		
+	if($stmt->fetch()){
+	$json_result["name"]=$name;
+	$json_result["email"]=$name;
+	$json_result["dob"]=$name;
+	$json_result["achievements"]=json_decode($ach,true);
+	$user_json=json_encode($json_result);
+	echo $user_json;
 	}
-	
 } 
 
 catch ( Exception $e ) {
