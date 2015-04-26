@@ -93,3 +93,21 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 	
 }]);
 
+p1.controller("searchController",['$scope','$http','$window',function($scope,$http,$window){
+	$scope.items=[];
+	$scope.change=function(){
+		var request = $http({
+		    method: "get",
+		    url: "/search.php?user="+$scope.query,
+		    headers: { 'Content-Type': 'application/json'
+		    	}
+		});
+		request.success(function (data) {
+		    $scope.items=data;
+		});
+	}
+	$scope.openProfile=function(item){
+		$window.location.href="/userprofile.php?user="+item;
+	}
+	
+}]);
