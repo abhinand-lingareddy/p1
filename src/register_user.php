@@ -24,9 +24,8 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 // prepare and bind
-$stmt = $conn->prepare("INSERT INTO account (name, email,dob,password) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO account (name, email,dob,password,achievements,connections,pendingrequests) VALUES (?, ?, ?, ?, '[]', '[]', '[]')");
 $stmt->bind_param("ssss", $name, $email, $dob, $password);
 
 

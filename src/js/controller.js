@@ -69,16 +69,13 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		});
 		request.success(function (data) {
 		    $scope.user=data;
-			if($scope.user["achievements"]==null){
-				$scope.user["achievements"]=[];
-			}
 		});
 	}
 	
 	
 }]);
 p1.controller("peerController",['$scope','$http',function($scope,$http){
-	$scope.dataInit=function(data){
+	$scope.dataInit=function(data,id){
 		$scope.edit=[];
 		var request = $http({
 		    method: "get",
@@ -88,8 +85,37 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 		});
 		request.success(function (data) {
 		    $scope.user=data;
+		    if(id==null||id==$scope.user.id){
+		    	$scope.connect=true;
+		    }
+		    else{
+		    	$scope.connect=false;
+		    	if($scope.user.connections.indexOf(id)!=-1){
+		    		$scope.connectionbutton="disconnect";
+		    	}else if($scope.user.pendingrequests.indexOf(id)!=-1){
+		    		$scope.connectionbutton="request sent";
+		    	}else{
+		    		$scope.connectionbutton="connect";
+		    	}
+		    }
 		});
 	}
+	$scope.addConnection=function(id){
+			var request = $http({
+			    method: "post",
+			    url: "/update.php",
+			    data: {
+			        record_type: "pendingrequests",
+			        record: $scope.user.id,
+			    },
+			    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+			    	}
+			});
+			request.success(function (data) {
+				$scope.user["pendingrequests"].push(id);  
+				$scope.connectionbutton="request sent";
+			});
+		}	
 	
 }]);
 

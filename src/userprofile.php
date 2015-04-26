@@ -1,13 +1,15 @@
-
+<?php require "session.php"?>
 <head>
 <script type="text/javascript" src="js/angular/angular.js"></script>
 <script type="text/javascript" src="js/controller.js"></script>
 </head>
-<body ng-app="p1" ng-controller="peerController" id="contentsDivID" ng-init="dataInit('<?php echo $_GET['user']?>')" >
+<body ng-app="p1" ng-controller="peerController" id="contentsDivID" ng-init="dataInit('<?php echo $_GET['user']?>',<?php echo $_SESSION['id']?>)" >
 
 username{{user['name']}}<br>
 email{{user['email']}}<br>
 dob{{user['dob']}}<br>
+
+<button ng-hide="connect" ng-click="addConnection(<?php echo $_SESSION['id']?>)">{{connectionbutton}}</button>
 
 
 <div ng-repeat="ach in user['achievements']">

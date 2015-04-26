@@ -22,16 +22,19 @@ try {
 		die ( "Connection failed: " . $conn->connect_error );
 	}
 	
-	$stmt = $conn->prepare ( "SELECT name,email,dob,achievements FROM account where name=? " );
+	$stmt = $conn->prepare ( "SELECT id,name,email,dob,achievements,connections,pendingrequests FROM account where name=? " );
 	$stmt->bind_param ( "s", $user );
 	
 	$result = $stmt->execute ();
-	$stmt->bind_result ( $name, $email, $dob, $ach );
+	$stmt->bind_result ( $id,$name, $email, $dob, $ach,$connections,$pendingrequests );
 	if($stmt->fetch()){
+	$json_result["id"]=$id;
 	$json_result["name"]=$name;
 	$json_result["email"]=$email;
 	$json_result["dob"]=$dob;
 	$json_result["achievements"]=json_decode($ach,true);
+	$json_result["connections"]=json_decode($connections,true);
+	$json_result["pendingrequests"]=json_decode($pendingrequests,true);
 	$user_json=json_encode($json_result);
 	echo $user_json;
 	}
