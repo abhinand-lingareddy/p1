@@ -10,6 +10,13 @@ username{{user['name']}}<br>
 email{{user['email']}}<br>
 dob{{user['dob']}}<br>
 
+<div ng-repeat="pendingrequest in user['pendingrequests']">
+<label>{{pendingrequest[0]}}</label>
+<button ng-click="connectRequest($index)">connect</button>
+<button ng-click="rejectRequest($index)">reject</button>
+</div>
+
+
 
 <div ng-repeat="ach in user['achievements']">
 <ng:switch on='edit[$index]'>
@@ -26,11 +33,13 @@ description
 <h3>date</h3>{{ach['date']}}<br>
 <h3>organisation</h3>{{ach['organisation']}}<br>
 <h3>description</h3>{{ach['description']}}<br>
-<input type='image' src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-document-edit-icon.png'  ng-click='editClick($index)'>
-<input type='image' src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/24/Actions-edit-delete-icon.png' ng-click='deleteRequest($index)'>
+<input type='image' src='pic/edit.png'  ng-click='editClick($index)'>
+<input type='image' src='pic/delete.png' ng-click='deleteRequest($index)'>
 </div>
 </ng:switch>
 </div>
+
+
 
 
 <br> Add achievement<br>

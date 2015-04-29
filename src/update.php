@@ -16,8 +16,9 @@ try {
 	$postdata_json = json_decode ( $postdata, true );
 	
 	$record_type =$postdata_json['record_type'] ;
+	$session = getIfSet($postdata_json,'session');
 	
-	if ($record_type == "pendingrequests") {
+	if ($session ==null) {
 		$record =$_SESSION['id'];
 		$id = $postdata_json[ 'record' ];
 	} else {
@@ -46,7 +47,6 @@ try {
 			array_push ( $entity_array, $record );
 				
 		} else {
-			echo "correct";
 			$entity_array [$record_id] = $record;
 		}
 		$encoded_entity = json_encode ( $entity_array,true);

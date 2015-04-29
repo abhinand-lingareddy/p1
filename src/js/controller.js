@@ -10,6 +10,7 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		    data: {
 		        record_type: "achievements",
 		        record: $scope.ach,
+		        session:"session"
 		    },
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
 		    	}
@@ -21,6 +22,36 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		$scope.ach=[];
 
 	}
+	$scope.rejectRequest=function(index){
+		var request = $http({
+		    method: "post",
+		    url: "/delete.php",
+		    data: {
+		        record_type: "pendingrequests",
+		        record: $scope.user.pendingrequests[index][1],
+		        session:"true"
+		    },
+		    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+		    	}
+		});
+		request.success(function (data) {
+			$scope.user.pendingrequests.splice(index,1);
+		});
+	}
+	$scope.connectRequest=function(index){
+		var request = $http({
+		    method: "post",
+		    url: "/connect.php",
+		    data: {
+		        connectId: $scope.user.pendingrequests[index][1]
+		    },
+		    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+		    	}
+		});
+		request.success(function (data) {
+			$scope.user.pendingrequests.splice(index,1);
+		});
+	}
 	$scope.updateRequest=function(index){
 		var request = $http({
 		    method: "post",
@@ -29,6 +60,7 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		        record_id: index,
 		        record_type: "achievements",
 		        record: $scope.user["achievements"][index],
+		        session:"session"
 		    },
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
 		    	}
@@ -46,7 +78,8 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		    url: "/delete.php",
 		    data: {
 		        record_id: index,
-		        record_type: "achievements"
+		        record_type: "achievements",
+		        session:"session"
 		    },
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
 		    	}
@@ -92,7 +125,7 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 		    	$scope.connect=false;
 		    	if($scope.user.connections.indexOf(id)!=-1){
 		    		$scope.connectionbutton="disconnect";
-		    	}else if($scope.user.pendingrequests.indexOf(id)!=-1){
+		    	}else if($scope.user.pendingrequest!=null&&$scope.user.pendingrequest===true){
 		    		$scope.connectionbutton="request sent";
 		    	}else{
 		    		$scope.connectionbutton="connect";
@@ -101,6 +134,7 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 		});
 	}
 	$scope.addConnection=function(id){
+		if($scope.connectionbutton=="connect"){
 			var request = $http({
 			    method: "post",
 			    url: "/update.php",
@@ -112,10 +146,25 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 			    	}
 			});
 			request.success(function (data) {
-				$scope.user["pendingrequests"].push(id);  
 				$scope.connectionbutton="request sent";
 			});
+		}else if($scope.connectionbutton=="request sent"){
+			
+			var request = $http({
+			    method: "post",
+			    url: "/delete.php",
+			    data: {
+			        record_type: "pendingrequests",
+			        record: $scope.user.id,
+			    },
+			    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+			    	}
+			});
+			request.success(function (data) {
+				$scope.connectionbutton="connect";
+			});
 		}	
+	}
 	
 }]);
 
