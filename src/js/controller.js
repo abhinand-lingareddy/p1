@@ -94,7 +94,7 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		$scope.edit=[];
 		var request = $http({
 		    method: "post",
-		    url: "/profile.php",
+		    url: "/myprofilerest.php",
 		    headers: { 'Content-Type': 'application/json'
 		    	}
 		});
@@ -110,7 +110,7 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 		$scope.edit=[];
 		var request = $http({
 		    method: "get",
-		    url: "/peerprofile.php?user="+data,
+		    url: "/profilerest.php?user="+data,
 		    headers: { 'Content-Type': 'application/json'
 		    	}
 		});
@@ -193,7 +193,7 @@ p1.controller("searchController",['$scope','$http','$window',function($scope,$ht
 		});
 	}
 	$scope.openProfile=function(item){
-		$window.location.href="/userprofile.php?user="+item;
+		$window.location.href="/profile.php?user="+item;
 	}
 	
 }]);

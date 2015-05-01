@@ -1,35 +1,46 @@
 <?php
 require 'dbconstants.php';
+function search($conn,$user) {
+	try {
+		$stmt = $conn->prepare ( "SELECT name FROM account where name like  ? " );
+		if ($stmt === false) {
+			throw new Exception ( "error:db query error" );
+		}
+		$stmt->bind_param ( "s", $user );
+		
+		$result = $stmt->execute ();
+		$stmt->bind_result ( $name );
+		$result = array ();
+		for($i = 0; $stmt->fetch (); $i ++) {
+			$result [$i] = $name;
+		}
+		echo json_encode ( $result );
+	} catch ( Exception $e ) {
+		throw $e;
+	} finally {
+		$stmt->close ();
+	}
+}
 
 try {
 	$servername = servername;
 	$dbusername = username;
 	$dbpassword = dbpassword;
 	$dbname = dbname;
-	if(isset($_GET["user"])){
-		$user="%{$_GET['user']}%";
+	if (isset ( $_GET ["user"] )) {
+		$user = "%{$_GET['user']}%";
 	}
 	// Create connection
 	$conn = new mysqli ( $servername, $dbusername, $dbpassword, $dbname );
 	// Check connection
 	if ($conn->connect_error) {
-		die ( "Connection failed: " . $conn->connect_error );
+		throw new Exception ( "error:db connection failed" );
 	}
-
-	$stmt = $conn->prepare ( "SELECT name FROM account where name like  ? " );
-	$stmt->bind_param ( "s", $user );
-
-	$result = $stmt->execute ();
-	$stmt->bind_result ( $name );
-	$result=array();
-	for($i=0;$stmt->fetch();$i++){
-		$result[$i]=$name;
-	}
-	echo json_encode($result);
-}
+	search($conn, $user);
+} 
 
 catch ( Exception $e ) {
-	// error
+	echo $e->getMessage ();
 } finally{
 	$conn->close ();
 }

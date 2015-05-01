@@ -1,8 +1,12 @@
 <?php
 require 'session.php';
 require 'dbconstants.php';
-function disconnect($conn,$id,$connectId) {
+function disconnect($conn, $id, $connectId) {
+	try{
 	$stmt = $conn->prepare ( "SELECT connections FROM account where id = ?" );
+	if ($stmt === false) {
+		throw new Exception ( "error:db query error" );
+	}
 	$stmt->bind_param ( "i", $id );
 	
 	$result = $stmt->execute ();
@@ -18,7 +22,14 @@ function disconnect($conn,$id,$connectId) {
 		$stmt->bind_param ( "si", $encoded_entity, $id );
 		$stmt->execute ();
 	} else {
-		echo "failure";
+		throw new Exception ( "error:db query fetch failed" );
+			}
+	}
+	catch (Exception $e){
+		throw e;
+	}
+	finally {
+		$stmt->close ();
 	}
 }
 try {
@@ -33,21 +44,20 @@ try {
 	$conn = new mysqli ( $servername, $dbusername, $dbpassword, $dbname );
 	// Check connection
 	if ($conn->connect_error) {
-		die ( "Connection failed: " . $conn->connect_error );
+		throw new Exception ( "error:db connection failed" );
 	}
 	
 	$id = $_SESSION ['id'];
 	$connectId = $postdata_json ['connectId'];
-	//start tranaction
-	disconnect($conn, $id, $connectId);
-	disconnect($conn, $connectId, $id);
-	//end transaction
-	
+	// start tranaction
+	disconnect ( $conn, $id, $connectId );
+	disconnect ( $conn, $connectId, $id );
+	// end transaction
 } 
 
 catch ( Exception $e ) {
-	// error
-} finally{
+	echo $e->getMessage ();
+	} finally{
 	$conn->close ();
 }
 
