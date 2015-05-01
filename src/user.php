@@ -43,7 +43,7 @@ description
 
 
 <br> Add achievement<br>
-		Title: <input type="text" name="title" ng-model="ach['name']"><br>
+		Title: <input type="text" name="title" ng-model="ach['title']"><br>
 		 Organisation: <input	type="text" name="organisation" ng-model="ach['organisation']"><br>
 		  Date: <input type="text"	name="date" ng-model="ach['date']"><br> 
 		  <label>Description </label>

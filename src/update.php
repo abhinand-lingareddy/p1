@@ -25,7 +25,7 @@ try {
 		$record_id = getIfSet($postdata_json,'record_id');
 		$id = $_SESSION['id' ];
 		$record =$postdata_json['record'];
-		var_dump($record_id);
+		var_dump($record);
 	}
 	
 	// Create connection
@@ -45,6 +45,7 @@ try {
 		$entity_array = json_decode ( $entity, true );
 		if ($record_id ===NULL) {
 			array_push ( $entity_array, $record );
+			print_r($record);
 				
 		} else {
 			$entity_array [$record_id] = $record;

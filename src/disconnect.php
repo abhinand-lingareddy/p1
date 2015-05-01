@@ -10,7 +10,8 @@ function disconnect($conn,$id,$connectId) {
 	if ($stmt->fetch ()) {
 		$stmt->free_result ();
 		$entity_array = json_decode ( $entity, true );
-		array_push ( $entity_array, $connectId );
+		$record_id = array_search ( $connectId, $entity_array );
+		array_splice ( $entity_array, $record_id, 1 );
 		$encoded_entity = json_encode ( $entity_array, true );
 		
 		$stmt = $conn->prepare ( "UPDATE account set connections = ?  where id = ?" );
@@ -41,26 +42,7 @@ try {
 	disconnect($conn, $id, $connectId);
 	disconnect($conn, $connectId, $id);
 	//end transaction
-	$stmt = $conn->prepare ( "SELECT pendingrequests FROM account where id = ?" );
-	$stmt->bind_param ( "i", $id );
 	
-	$result = $stmt->execute ();
-	$stmt->bind_result ( $entity );
-	if ($stmt->fetch ()) {
-		$stmt->free_result ();
-		if ($entity !== NULL) {
-			$entity_array = json_decode ( $entity, true );
-		}
-			$record_id = array_search ( $record, $entity_array );
-		
-		array_splice ( $entity_array, $record_id, 1 );
-		$encoded_entity = json_encode ( $entity_array );
-		$stmt = $conn->prepare ( "UPDATE account set pendingrequests = ?  where id = ?" );
-		$stmt->bind_param ( "si", $encoded_entity, $id );
-		$stmt->execute ();
-	} else {
-		echo "failure";
-	}
 } 
 
 catch ( Exception $e ) {

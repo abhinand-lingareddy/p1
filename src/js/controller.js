@@ -16,10 +16,10 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		    	}
 		});
 		request.success(function (data) {
-		    
+			$scope.user["achievements"].push($scope.ach);
+			$scope.ach=[];
 		});
-		$scope.user["achievements"].push($scope.ach);
-		$scope.ach=[];
+		
 
 	}
 	$scope.rejectRequest=function(index){
@@ -66,10 +66,10 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 		    	}
 		});
 		request.success(function (data) {
-		    
+			$scope.edit[index]="true";
 		});
 		
-		$scope.edit[index]="true";
+		
 
 	}
 	$scope.deleteRequest=function(index){
@@ -88,8 +88,6 @@ p1.controller("userController",['$scope','$http',function($scope,$http){
 			$scope.user["achievements"].splice(index,1);
 		});
 		
-		
-		$scope.edit[index]="true";
 
 	}
 	$scope.dataInit=function(data){
@@ -163,7 +161,20 @@ p1.controller("peerController",['$scope','$http',function($scope,$http){
 			request.success(function (data) {
 				$scope.connectionbutton="connect";
 			});
-		}	
+		}else if($scope.connectionbutton=="disconnect"){
+			var request = $http({
+			    method: "post",
+			    url: "/disconnect.php",
+			    data: {
+			        connectId: $scope.user.id
+			    },
+			    headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+			    	}
+			});
+			request.success(function (data) {
+				$scope.connectionbutton="connect";
+			});
+		}
 	}
 	
 }]);
