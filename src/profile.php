@@ -95,24 +95,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="essential-buttons.html">UI Components</a>
-                        </li>
-                        <li class="hidden-sm" data-toggle="tooltip" data-placement="bottom" title="A few Color Examples. Download includes CSS Files for all color examples & the tools to Generate any Color combination. This Color-Switcher is for previewing purposes only.">
-                            <ul class="skins">
-                                <li><span data-file="theme-bundle" data-skin="default" style="background: #16ae9f "></span>
-                                </li>
-                                <li><span data-file="skin-orange" data-skin="orange" style="background: #e74c3c "></span>
-                                </li>
-                                <li><span data-file="skin-blue" data-skin="blue" style="background: #4687ce "></span>
-                                </li>
-                                <li><span data-file="skin-purple" data-skin="purple" style="background: #af86b9 "></span>
-                                </li>
-                                <li><span data-file="skin-brown" data-skin="brown" style="background: #c3a961 "></span>
-                                </li>
-                                <li><span data-file="skin-default-nav-inverse" data-skin="default-nav-inverse" style="background: #242424 "></span>
-                                </li>
-                            </ul>
-                        </li>
+                       
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden-xs">
@@ -146,17 +129,16 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <div class="profile">
                         <img src="images/people/110/guy-5.jpg" alt="people" class="img-circle" />
                         <h4>{{user['name']}}</h4>
+                         <button ng-hide="connect" ng-click="addConnection(<?php echo $_SESSION['id']?>)" class="btn btn-default" >{{connectionbutton}}</button>
                     </div>
                 </div>
                 <h4 class="category">Account</h4>
                 <ul class="sidebar-menu">
-                    <li class="active"><a href="user-private-profile.html"><i class="icon-user-1"></i> <span>Edit Profile</span></a>
+                    <li class="active"><a href="myprofile.php"><i class="icon-user-1"></i> <span>My Profile</span></a>
                     </li>
-                    <li><a href="user-private-users.html"><i class="fa fa-group"></i> <span>Manage Friends</span></a>
+                    <li><a ><i class="icon-comment-fill-1"></i> <span>Message</span></a>
                     </li>
-                    <li><a href="user-private-messages.html"><i class="icon-comment-fill-1"></i> <span>Messages</span></a>
-                    </li>
-                    <li><a href="login.html"><i class="icon-unlock-fill"></i> <span>Logout</span></a>
+                    <li><a href="login.php"><i class="icon-unlock-fill"></i> <span>Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -408,8 +390,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="subnav">
                                 <ul class="nav navbar-nav ">
-                                    <li><a href="user-private-timeline.html"><i class="fa fa-fw icon-ship-wheel"></i> My Timeline</a>
-                                    </li>
+                                   <?php require 'searchbox.php';?>
                                 </ul>
                                 <ul class="nav navbar-nav  navbar-right ">
                                     <li><a href="login.html"> Logout<i class="fa fa-fw fa-sign-out"></i></a>

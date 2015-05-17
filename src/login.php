@@ -53,13 +53,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         <div class="container-fluid">
             <div class="lock-container">
             <form action="login_user.php" method="post">
-                <h1>Account Access</h1>
+                <h1>Login</h1>
                 <div class="panel panel-default text-center">
                     <div class="panel-body">
                         <input class="form-control" type="text" name="email" placeholder="Username">
                         <input class="form-control" type="password" name="password" placeholder="Enter Password">
                         <input type="submit" class="btn btn-primary" value="Login"> <i class="fa fa-fw fa-unlock-alt"></i></input>
                         <a href="#" class="forgot-password">Forgot password?</a>
+                        <a href="register.php" class="forgot-password">not yet user?</a>
                     </div>
                 </div>
                 </form>
