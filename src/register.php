@@ -69,7 +69,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 <input type="text" name="name" class="form-control" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="email" name="email" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="dob" class="form-control" placeholder="Date Of Birth">
