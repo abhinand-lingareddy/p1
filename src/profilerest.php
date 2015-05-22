@@ -1,4 +1,3 @@
-//request pending case yet to do
 
 <?php
 require 'dbconstants.php';

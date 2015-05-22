@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>ThemeKit</title>
+    <title>Connections</title>
     <script type="text/javascript" src="srcjs/angular/angular.js"></script>
 <script type="text/javascript" src="srcjs/angular/ng-file-upload.js"></script>
 <script type="text/javascript" src="srcjs/controller.js"></script>
@@ -66,32 +66,23 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <span class="icon-bar"></span>
                     </button>
                     <a href="#sidebar-chat" data-toggle="sidebar-menu" data-effect="st-effect-1" class="toggle pull-right visible-xs"><i class="fa fa-comments"></i></a>
-                    <a class="navbar-brand" href="index.html">ThemeKit</a>
+                    <a class="navbar-brand" href="index.php">Connections</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="main-nav">
                     <ul class="nav navbar-nav">
-                        <li><a href="../../index.html">Themes</a>
+                        <li><a href="../../index.php">Connections</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header">Public User Pages</li>
-                                <li><a href="index.html">Timeline</a>
+                                <li><a href="index.php">Timeline</a>
                                 </li>
-                                <li><a href="user-public-profile.html">About</a>
+                                <li><a href="#">About</a>
                                 </li>
-                                <li><a href="user-public-users.html">Friends</a>
-                                </li>
-                                <li class="dropdown-header">Private User Pages</li>
-                                <li><a href="user-private-messages.html">Messages</a>
-                                </li>
-                                <li class="active"><a href="user-private-profile.html">Profile</a>
-                                </li>
-                                <li><a href="user-private-timeline.html">Timeline</a>
-                                </li>
-                                <li><a href="user-private-users.html">Friends</a>
-                                </li>
+                                <li><a href="#">Friends</a>
+                                </li>                                           
                             </ul>
                         </li>
                     </ul>
@@ -398,30 +389,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </div>
                     </nav>
                     <div class="container-fluid">
-                        <div class="tabbable">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-fw fa-picture-o"></i> Photos</a>
-                                </li>
-                                <li class=""><a href="#profile" data-toggle="tab"><i class="fa fa-fw fa-folder"></i> Albums</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade active in" id="home">
-                                    <img src="images/place1.jpg" alt="image" />
-                                    <img src="images/place2.jpg" alt="image" />
-                                    <img src="images/food1.jpg" alt="image" />
-                                </div>
-                                <div class="tab-pane fade" id="profile">
-                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                                </div>
-                                <div class="tab-pane fade" id="dropdown1">
-                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-                                </div>
-                                <div class="tab-pane fade" id="dropdown2">
-                                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-                                </div>
-                            </div>
-                        </div>
+                
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="panel panel-default">
