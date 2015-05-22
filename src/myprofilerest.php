@@ -9,7 +9,7 @@ function getusersbyarray($conn, $userarray, $withId) {
 	if (sizeof ( $userarray ) !== 0) {
 		$query = "select name,id from account where id= $userarray[0] ";
 		for($i = 1; $i < sizeof ( $userarray ); $i ++) {
-			$query = $query + "or id=$userarray[i]";
+			$query = "$query or id=$userarray[$i]";
 		}
 		$result = $conn->query ( $query );
 		
